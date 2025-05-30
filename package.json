@@ -21,5 +21,9 @@
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+   "resolutions": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  }
 }
