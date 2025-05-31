@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Keyboard } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Scan } from "lucide-react-native";
 import {
   Authenticated,
