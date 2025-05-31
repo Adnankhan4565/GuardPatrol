@@ -1,10 +1,10 @@
-import { useFrameworkReady } from '../hooks/useFrameworkReady';
+import { useFrameworkReady } from "../hooks/useFrameworkReady";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { StatusBar } from 'expo-status-bar';
-import { Platform } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Platform } from "react-native";
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
@@ -20,7 +20,7 @@ export default function RootLayout() {
   useFrameworkReady();
 
   return (
- <ConvexAuthProvider
+    <ConvexAuthProvider
       client={convex}
       storage={
         Platform.OS === "android" || Platform.OS === "ios"
@@ -33,6 +33,6 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
-  </ConvexAuthProvider>
+    </ConvexAuthProvider>
   );
 }

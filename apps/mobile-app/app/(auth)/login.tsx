@@ -1,14 +1,43 @@
-import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
-import { router } from 'expo-router';
-import { Lock, User } from 'lucide-react-native';
+import { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Alert,
+} from "react-native";
+import { router } from "expo-router";
+import { Lock, User } from "lucide-react-native";
+import { useAuthActions } from "@convex-dev/auth/react";
 
 export default function LoginScreen() {
-  const [guardId, setGuardId] = useState('');
-  const [password, setPassword] = useState('');
+  const { signIn } = useAuthActions();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleLogin = () => {
-    router.replace('/(tabs)');
+  const handleSubmit = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      await signIn("password", { email, password, flow: "signIn" });
+      // Successfully signed in, navigate to main app
+      router.replace("/(tabs)");
+    } catch (error) {
+      console.error("Login error:", error);
+      Alert.alert(
+        "Login Failed",
+        "Could not sign in. Please check your credentials and try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -23,10 +52,12 @@ export default function LoginScreen() {
           <User size={20} color="#666" style={styles.inputIcon} />
           <TextInput
             style={styles.input}
-            placeholder="Guard ID"
-            value={guardId}
-            onChangeText={setGuardId}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
             autoCapitalize="none"
+            keyboardType="email-address"
+            editable={!submitting}
           />
         </View>
 
@@ -38,11 +69,18 @@ export default function LoginScreen() {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            editable={!submitting}
           />
         </View>
 
-        <Pressable style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
+        <Pressable
+          style={[styles.loginButton, submitting && styles.loginButtonDisabled]}
+          onPress={handleSubmit}
+          disabled={submitting}
+        >
+          <Text style={styles.loginButtonText}>
+            {submitting ? "Signing in..." : "Login"}
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -52,36 +90,36 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     padding: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   header: {
     marginBottom: 40,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
+    color: "#666",
+    textAlign: "center",
     marginTop: 8,
   },
   form: {
     gap: 16,
   },
   inputContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: "#e1e1e1",
   },
   inputIcon: {
     marginRight: 12,
@@ -92,16 +130,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loginButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     height: 50,
     borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 8,
   },
+  loginButtonDisabled: {
+    backgroundColor: "#ccc",
+  },
   loginButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
