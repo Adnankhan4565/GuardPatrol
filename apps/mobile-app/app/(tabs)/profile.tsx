@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { router } from "expo-router";
 import { LogOut, User } from "lucide-react-native";
-import { useConvexAuth } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
 const MOCK_GUARD_DATA = {
