@@ -1,4 +1,4 @@
-package com.anonymous.guardpatrol
+package com.abnan.guardpatrol
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

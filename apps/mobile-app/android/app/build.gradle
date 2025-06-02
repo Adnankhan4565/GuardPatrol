@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.guardpatrol'
+    namespace 'com.abnan.guardpatrol'
     defaultConfig {
-        applicationId 'com.anonymous.guardpatrol'
+        applicationId 'com.abnan.guardpatrol'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

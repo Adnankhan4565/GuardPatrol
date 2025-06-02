@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.adnan.guardpatrol",
       "supportsTablet": true,
       "infoPlist": {
         "NFCReaderUsageDescription": "This app uses NFC to scan security checkpoint tags for patrol tracking",
@@ -18,7 +19,7 @@
         ]
       }
     },
-    "android": {
+    "android": {      
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
@@ -27,7 +28,7 @@
         "android.permission.NFC",
         "android.permission.NFC"
       ],
-      "package": "com.anonymous.guardpatrol"
+      "package": "com.abnan.guardpatrol"
     },
     "web": {
       "bundler": "metro",

@@ -1,4 +1,4 @@
-package com.anonymous.guardpatrol
+package com.abnan.guardpatrol
 
 import android.app.Application
 import android.content.res.Configuration
