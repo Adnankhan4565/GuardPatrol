@@ -1,4 +1,3 @@
-import { useFrameworkReady } from "../hooks/useFrameworkReady";
 import { ConvexReactClient,useConvexAuth } from "convex/react";
 import { Stack, useRouter, useSegments } from "expo-router";
 import * as SecureStore from "expo-secure-store";
@@ -37,13 +36,12 @@ function AuthNavigationHandler({ children }: { children: React.ReactNode }) {
       // User is authenticated but still in auth group, redirect to tabs
       router.replace("/(tabs)");
     }
-  }, [isAuthenticated, isLoading, segments]);
+  }, [isAuthenticated, isLoading, segments, router]);
 
   return <>{children}</>;
 }
 
 export default function RootLayout() {
-  useFrameworkReady();
 
   return (
     <SafeAreaProvider>

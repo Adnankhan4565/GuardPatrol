@@ -43,8 +43,8 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Security Guard Portal</Text>
-        <Text style={styles.subtitle}>Login to start your shift</Text>
+        <Text style={styles.title}>Convex + EXPO (NFC)</Text>
+        {/* <Text style={styles.subtitle}>Login to start your shift</Text> */}
       </View>
 
       <View style={styles.form}>
